@@ -46,25 +46,26 @@ function AuthForm<T extends FieldValues>({
 
   const handleSubmit: SubmitHandler<T> = async (data) => {
     const result = await onSubmit(data);
+
     if (result.success) {
       toast({
         title: "Success",
-
         description: isSignedIn
           ? "You have successfully signed in."
           : "You have successfully signed up.",
       });
       router.push("/");
-    }
-    else{
-      toast({
-        title: "Error",
-
-        description: isSignedIn
-          ? "Error signing in."
-          : "Error signing up.",
-          
-      });
+    } else {
+      if (result.error === "TOO_FAST") {
+        router.push("/too-fast"); // Redirect to the rate-limit page
+      } else {
+        toast({
+          title: "Error",
+          description:
+            result.error ||
+            (isSignedIn ? "Error signing in." : "Error signing up."),
+        });
+      }
     }
   };
 
