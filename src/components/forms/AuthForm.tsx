@@ -22,6 +22,8 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
 import ImageUpload from "./ImageUpload";
+import { toast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 interface IProps<T extends FieldValues> {
   schema: ZodType<T>;
   defaultValues: T;
@@ -40,8 +42,31 @@ function AuthForm<T extends FieldValues>({
     defaultValues: defaultValues as DefaultValues<T>,
     resolver: zodResolver(schema),
   });
+  const router = useRouter();
 
-  const handleSubmit: SubmitHandler<T> = (data) => {};
+  const handleSubmit: SubmitHandler<T> = async (data) => {
+    const result = await onSubmit(data);
+    if (result.success) {
+      toast({
+        title: "Success",
+
+        description: isSignedIn
+          ? "You have successfully signed in."
+          : "You have successfully signed up.",
+      });
+      router.push("/");
+    }
+    else{
+      toast({
+        title: "Error",
+
+        description: isSignedIn
+          ? "Error signing in."
+          : "Error signing up.",
+          
+      });
+    }
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -90,7 +115,11 @@ function AuthForm<T extends FieldValues>({
             />
           ))}
 
-          <Button type="submit" className="form-btn">
+          <Button
+            disabled={form.formState.isLoading}
+            type="submit"
+            className="form-btn disabled:bg-gray-100"
+          >
             {isSignedIn ? "Sign In " : "Sign Up"}
           </Button>
         </form>

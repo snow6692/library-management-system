@@ -1,5 +1,6 @@
-"use client"
+"use client";
 import AuthForm from "@/components/forms/AuthForm";
+import { singUp } from "@/lib/actions/authAction";
 import { singUpSchema } from "@/lib/validations";
 import React from "react";
 
@@ -15,7 +16,7 @@ function page() {
         universityId: 0,
         universityCard: "",
       }}
-      onSubmit={() => {}}
+      onSubmit={singUp}
     />
   );
 }
