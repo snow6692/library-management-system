@@ -15,7 +15,7 @@ interface IProps {
   className?: string;
   coverColor: string;
   coverImage: string;
-  variant: BookCoverVariant;
+  variant?: BookCoverVariant;
 }
 function BookCover({
   coverColor = "#012B48",

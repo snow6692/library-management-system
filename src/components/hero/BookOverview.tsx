@@ -2,7 +2,7 @@ import React from "react";
 import { Book } from "../../../types";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import BookCover from "../BookCover";
+import BookCover from "./BookCover";
 
 function BookOverview({
   title,
@@ -52,7 +52,7 @@ function BookOverview({
         </div>
 
         <p className="book-description">{description}</p>
-        <Button className="w-full">
+        <Button className="book-overview_btn">
           <Image src={"/icons/book.svg"} alt="Book" width={20} height={20} />
           <p className="font-bebas-neue text-xl text-dark-100">Borrow </p>
         </Button>

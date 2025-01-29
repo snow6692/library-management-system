@@ -1,9 +1,20 @@
 import React from "react";
+import { Book } from "../../../types";
+import BookCard from "./BookCard";
 
-function BookList() {
+interface IProps {
+  title: string;
+  books: Book[];
+  containerClassName?: string;
+}
+function BookList({ title, books, containerClassName }: IProps) {
   return (
-    <section>
-      <h2 className="font-bebas-neue text-4xl text-light-100">Popular Books</h2>
+    <section className={containerClassName}>
+      <h2 className="font-bebas-neue text-4xl text-light-100">{title}</h2>
+
+      <ul className=" book-list">
+        {books.map((book)=><BookCard key={book.id} {...book} />)}
+      </ul>
     </section>
   );
 }
