@@ -1,5 +1,6 @@
 const config = {
   env: {
+    databaseUrl: process.env.DATABASE_URL,
     apiEndpoint: process.env.NEXT_PUBLIC_API_ENDPOINT!,
     imageKit: {
       publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY!,
