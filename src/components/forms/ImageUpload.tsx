@@ -26,7 +26,9 @@ const authenticator = async () => {
     const { signature, expire, token } = data;
     return { signature, expire, token };
   } catch (error: any) {
-    throw new Error("Auth request failed", error.message);
+    throw new Error(
+      `Auth request failed: ${error?.message || "Unknown error"}`,
+    );
   }
 };
 function ImageUpload({

@@ -1,5 +1,5 @@
 import React from "react";
-import { Book } from "../../../types";
+
 import Image from "next/image";
 import { Button } from "../ui/button";
 import BookCover from "./BookCover";
@@ -14,9 +14,18 @@ function BookOverview({
   description,
   color,
   cover,
-  video,
-  summary,
-}: Book) {
+}: Pick<
+  Book,
+  | "title"
+  | "author"
+  | "genre"
+  | "rating"
+  | "total_copies"
+  | "available_copies"
+  | "description"
+  | "color"
+  | "cover"
+>) {
   return (
     <section className="book-overview">
       <div className="flex flex-1 flex-col gap-5">

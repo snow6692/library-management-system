@@ -3,6 +3,8 @@ const config = {
     upstash: {
       redisUrl: process.env.UPSTASH_REDIS_URL,
       redisToken: process.env.UPSTASH_REDIS_TOKEN,
+      qStashUrl: process.env.QSTASH_URL,
+      qStashToken: process.env.QSTASH_TOKEN,
     },
     databaseUrl: process.env.DATABASE_URL,
     apiEndpoint: process.env.NEXT_PUBLIC_API_ENDPOINT!,

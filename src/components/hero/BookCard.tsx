@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Book } from "../../../types";
 import BookCover from "./BookCover";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
