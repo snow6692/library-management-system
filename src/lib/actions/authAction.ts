@@ -7,6 +7,8 @@ import { hash } from "bcryptjs";
 import { signIn } from "@/auth";
 import { headers } from "next/headers";
 import ratelimit from "../rateLimit";
+import { workflowClient } from "../workflow";
+import config from "../config";
 
 export async function signInWithCredentials(
   params: Pick<AuthCredentials, "email" | "password">,
@@ -63,6 +65,14 @@ export async function singUp(params: AuthCredentials) {
       password: hashedPassword,
       universityCard,
       universityId,
+    });
+    //this will trigger the post request in route.ts
+    await workflowClient.trigger({
+      url: `${config.env.prodApiEndpoint}/api/workflows/onboarding`,
+      body: {
+        email,
+        fullName,
+      },
     });
     await signInWithCredentials({ email, password });
     return { success: true };

@@ -1,12 +1,14 @@
 const config = {
   env: {
+    resendToken: process.env.RESEND_TOKEN!,
+    prodApiEndpoint: process.env.NEXT_PUBLIC_PROD_API_ENDPOINT,
     upstash: {
-      redisUrl: process.env.UPSTASH_REDIS_URL,
-      redisToken: process.env.UPSTASH_REDIS_TOKEN,
-      qStashUrl: process.env.QSTASH_URL,
-      qStashToken: process.env.QSTASH_TOKEN,
+      redisUrl: process.env.UPSTASH_REDIS_URL!,
+      redisToken: process.env.UPSTASH_REDIS_TOKEN!,
+      qStashUrl: process.env.QSTASH_URL!,
+      qStashToken: process.env.QSTASH_TOKEN!,
     },
-    databaseUrl: process.env.DATABASE_URL,
+    databaseUrl: process.env.DATABASE_URL!,
     apiEndpoint: process.env.NEXT_PUBLIC_API_ENDPOINT!,
     imageKit: {
       publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY!,
