@@ -9,7 +9,7 @@ interface Book {
   description: string;
   color: string;
   cover: string;
-  video: string;
+
   summary: string;
   isLoanedBook?: boolean;
 }
@@ -31,7 +31,6 @@ interface BookParams {
   coverColor: string;
   description: string;
   totalCopies: number;
-  videoUrl: string;
   summary: string;
 }
 

@@ -44,7 +44,7 @@ export const bookSchema = z.object({
     .min(2, { message: "Title is required at least 2 chars" })
     .max(50),
 
-  rating: z
+  rating: z.coerce
     .number()
     .min(1, { message: "Title is required at least 2 chars" })
     .max(5),
@@ -56,7 +56,7 @@ export const bookSchema = z.object({
     .string()
     .trim()
     .regex(/^#[0-9A-Fa-f]{6}$|^#[0-9A-Fa-f]{3}$/),
-  videoUrl: z.string().nonempty(),
+
   summary: z.string().trim().min(10, { message: "At least 10  chars" }),
 });
 

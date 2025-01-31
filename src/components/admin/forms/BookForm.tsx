@@ -1,11 +1,5 @@
 "use client";
-import {
-  DefaultValues,
-  Path,
-  SubmitHandler,
-  useForm,
-  UseFormReturn,
-} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -16,15 +10,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { ZodType } from "zod";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
-import { toast } from "@/hooks/use-toast";
+
 import { useRouter } from "next/navigation";
 import UploadThing from "@/components/forms/UploadThing";
 import { bookSchema } from "@/lib/validations";
 import { Textarea } from "@/components/ui/textarea";
+import ColorPicker from "../ColorPicker";
+import { toast } from "@/hooks/use-toast";
+import { createBook } from "@/lib/admin/actions/bookAction";
 
 interface IProps extends Partial<Book> {
   type: "create" | "update";
@@ -42,13 +36,29 @@ function BookForm({ type, ...book }: IProps) {
       totalCopies: 1,
       coverUrl: "",
       coverColor: "",
-      videoUrl: "",
+
       summary: "",
     },
     resolver: zodResolver(bookSchema),
   });
 
-  const onSubmit = async (values: bookSchema) => {};
+  const onSubmit = async (values: bookSchema) => {
+    const result = await createBook(values);
+    if (result.success) {
+      console.log(values);
+      toast({
+        title: "Success ",
+        description: "Book created successfully!  ",
+      });
+      router.push(`/admin/books/${result.data.id}`);
+    } else {
+      toast({
+        title: "Error",
+        description: result.message,
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <Form {...form}>
@@ -179,7 +189,7 @@ function BookForm({ type, ...book }: IProps) {
             </FormItem>
           )}
         />
-        {/* <FormField
+        <FormField
           control={form.control}
           name={"coverColor"}
           render={({ field }) => (
@@ -196,7 +206,7 @@ function BookForm({ type, ...book }: IProps) {
               <FormMessage />
             </FormItem>
           )}
-        /> */}
+        />
         <FormField
           control={form.control}
           name={"description"}
@@ -219,29 +229,6 @@ function BookForm({ type, ...book }: IProps) {
           )}
         />
 
-        {/* <FormField
-          control={form.control}
-          name={"videoUrl"}
-          render={({ field }) => (
-            <FormItem className="flex flex-col gap-1">
-              <FormLabel className="text-base font-normal text-dark-500">
-                Book Trailer
-              </FormLabel>
-              <FormControl>
-                <FileUpload
-                  type="video"
-                  accept="video/*"
-                  placeholder="Upload a book trailer"
-                  folder="books/videos"
-                  variant="light"
-                  onFileChange={field.onChange}
-                  value={field.value}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        /> */}
         <FormField
           control={form.control}
           name={"summary"}

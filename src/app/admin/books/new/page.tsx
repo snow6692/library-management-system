@@ -12,8 +12,8 @@ function page() {
       </Button>
 
       <section className="w-full max-w-2xl">
-        {/* TODO: BOOK FORM */}
-        <BookForm />
+       
+        <BookForm type=""  />
       </section>
     </>
   );
