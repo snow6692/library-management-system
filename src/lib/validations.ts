@@ -20,3 +20,44 @@ export const signInSchema = z.object({
 });
 
 export type signInSchema = z.infer<typeof signInSchema>;
+
+export const bookSchema = z.object({
+  title: z
+    .string()
+    .trim()
+    .min(2, { message: "Title is required at least 2 chars" })
+    .max(100),
+
+  description: z
+    .string()
+    .trim()
+    .min(10, { message: "Title is required at least 10 chars" })
+    .max(1000),
+  author: z
+    .string()
+    .trim()
+    .min(2, { message: "Author is required at least 2 chars" })
+    .max(100),
+  genre: z
+    .string()
+    .trim()
+    .min(2, { message: "Title is required at least 2 chars" })
+    .max(50),
+
+  rating: z
+    .number()
+    .min(1, { message: "Title is required at least 2 chars" })
+    .max(5),
+
+  totalCopies: z.coerce.number().int().positive().lte(10000),
+
+  coverUrl: z.string().nonempty(),
+  coverColor: z
+    .string()
+    .trim()
+    .regex(/^#[0-9A-Fa-f]{6}$|^#[0-9A-Fa-f]{3}$/),
+  videoUrl: z.string().nonempty(),
+  summary: z.string().trim().min(10, { message: "At least 10  chars" }),
+});
+
+export type bookSchema = z.infer<typeof bookSchema>;
