@@ -1,7 +1,8 @@
 const config = {
   env: {
+    uploadThingToken: process.env.UPLOADTHING_TOKEN!,
     resendToken: process.env.RESEND_TOKEN!,
-    prodApiEndpoint: process.env.NEXT_PUBLIC_PROD_API_ENDPOINT,
+    prodApiEndpoint: process.env.NEXT_PUBLIC_PROD_API_ENDPOINT!,
     upstash: {
       redisUrl: process.env.UPSTASH_REDIS_URL!,
       redisToken: process.env.UPSTASH_REDIS_TOKEN!,

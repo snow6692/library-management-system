@@ -21,9 +21,9 @@ import { ZodType } from "zod";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
-import ImageUpload from "./ImageUpload";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import UploadThing from "./UploadThing";
 interface IProps<T extends FieldValues> {
   schema: ZodType<T>;
   defaultValues: T;
@@ -97,7 +97,12 @@ function AuthForm<T extends FieldValues>({
                   </FormLabel>
                   <FormControl>
                     {field.name === "universityCard" ? (
-                      <ImageUpload onFileChange={field.onChange} />
+                      // <ImageUpload onFileChange={field.onChange} />
+                      <UploadThing
+                        onChange={field.onChange}
+                        endpoint="postImage"
+                        value={field.value}
+                      />
                     ) : (
                       <Input
                         required

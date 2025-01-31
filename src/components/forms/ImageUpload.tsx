@@ -38,7 +38,7 @@ function ImageUpload({
 }) {
   const ikUploadRef = useRef(null);
   const [file, setFile] = useState<{ filePath: string } | null>(null);
-  const onError = (error: any) => {
+  const onError = (error) => {
     console.log(error);
     toast({
       title: "Image upload failed",
@@ -46,7 +46,7 @@ function ImageUpload({
       variant: "destructive",
     });
   };
-  const onSuccess = (res: any) => {
+  const onSuccess = (res) => {
     setFile(res);
     onFileChange(res.filePath);
     toast({
@@ -72,7 +72,7 @@ function ImageUpload({
         onClick={(e) => {
           e.preventDefault();
           if (ikUploadRef.current) {
-            // @ts-ignore
+           
             ikUploadRef.current?.click();
           }
         }}
